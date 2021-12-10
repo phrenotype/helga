@@ -1,0 +1,26 @@
+{
+    "name": "sliive/validator",
+    "description": "Validate everything, from variables to files",
+    "type": "library",
+    "keywords": [
+        "validator",
+        "validation",
+        "php validator",
+        "php validation",
+        "php",
+        "file validation",
+        "image validation"
+    ],    
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paul Robert"            
+        }
+    ],
+    "autoload": {
+        "psr-4" : {
+            "Sliive\\Validator\\" : "Sliive/Validator"
+        },
+        "files" : ["Sliive/Validator/Functions/validate.php"]
+    }    
+}
