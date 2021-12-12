@@ -1,5 +1,5 @@
 {
-    "name": "sliive/validator",
+    "name": "chase/chase",
     "description": "Validate everything, from variables to files",
     "type": "library",
     "keywords": [
@@ -19,8 +19,11 @@
     ],
     "autoload": {
         "psr-4" : {
-            "Sliive\\Validator\\" : "Sliive/Validator"
+            "Chase\\" : "Chase/"
         },
-        "files" : ["Sliive/Validator/Functions/validate.php"]
-    }    
+        "files" : ["Chase/Functions/validate.php"]
+    },
+    "require" : {
+        "php" : ">=7.0.0"
+    }
 }
