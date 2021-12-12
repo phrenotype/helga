@@ -1,6 +1,6 @@
 {
     "name": "chase/validator",
-    "description": "Validate everything, from variables to files",
+    "description": "Validation at it's best - variables, forms and files",
     "type": "library",
     "keywords": [
         "validator",
