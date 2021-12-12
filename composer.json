@@ -1,5 +1,5 @@
 {
-    "name": "chase/chase",
+    "name": "chase/validator",
     "description": "Validate everything, from variables to files",
     "type": "library",
     "keywords": [
