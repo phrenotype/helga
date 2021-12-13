@@ -9,14 +9,6 @@ class RuleParser
 
         'mimes',
         'mimeTypes',
-
-        'file',
-        'fileSizeMax',
-        'fileSizeMin',
-        'fileImage',
-        'fileDoc',
-        'filePdf',
-        'fileXls',
     ];
 
 
@@ -55,7 +47,9 @@ class RuleParser
             }
             return $state;
         } else if (is_int(array_keys($this->__rules__)[0])) {
+
             $state->isSingle = true;
+
             foreach ($this->__rules__ as $rule) {
 
                 preg_match("/^\w+(?=:.*)?/", $rule, $function);
@@ -64,6 +58,11 @@ class RuleParser
                 if ($function !== 'required' && ($subject == null || trim($subject) == '')) {
                     continue;
                 }
+
+                if (preg_match("/^(file|mime)/", $function) && $function !== 'fileRequired' && (!is_readable($subject))) {
+                    continue;
+                }
+
 
                 preg_match("/^(\w+):([^:]*)/", $rule, $params);
                 if ($params[2] ?? false) {
@@ -83,8 +82,12 @@ class RuleParser
 
                 //echo $function . '|' . join(',', $params) . PHP_EOL;
 
+                if (!method_exists(Executioner::class, $function)) {
+                    throw new \Error(sprintf("Unknown rule directive '%s'.", $function));
+                }
 
                 $eval = call_user_func_array(Executioner::class . "::" . $function, $params);
+                
                 if (!$eval->return) {
                     if ($message) {
                         $eval->message = $message;
