@@ -29,16 +29,16 @@ function isImage(string $path)
     $image = false;
     switch ($type) {
         case IMAGETYPE_GIF:
-            $image = imagecreatefromgif($path);
+            $image = @imagecreatefromgif($path);
             break;
         case IMAGETYPE_PNG:
-            $image = imagecreatefrompng($path);
+            $image = @imagecreatefrompng($path);
             break;
         case IMAGETYPE_JPEG:
-            $image = imagecreatefromjpeg($path);
+            $image = @imagecreatefromjpeg($path);
             break;
         case IMAGETYPE_WEBP:
-            $image = imagecreatefromwebp($path);
+            $image = @imagecreatefromwebp($path);
             break;
     }
     return (!!$image);
