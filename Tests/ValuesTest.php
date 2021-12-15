@@ -38,6 +38,18 @@ class ValuesTest extends TestCase
         $this->assertEquals($v3->passes(), true);
     }
 
+    public function testRange()
+    {
+        $v1 = validate(5)->withRules(['range:5-10']);
+        $v2 = validate(5)->withRules(['range:1-5']);
+        $v3 = validate(3)->withRules(['range:5-10']);
+        $v4 = validate(5)->withRules(['range:1-4']);
+        $this->assertEquals($v1->passes(), true);
+        $this->assertEquals($v2->passes(), true);
+        $this->assertEquals($v3->passes(), false);
+        $this->assertEquals($v4->passes(), false);
+    }
+
     public function testMinLen()
     {
         $v1 = validate("chase")->withRules(['minLen:5']);
@@ -56,6 +68,18 @@ class ValuesTest extends TestCase
         $this->assertEquals($v1->passes(), true);
         $this->assertEquals($v2->passes(), true);
         $this->assertEquals($v3->passes(), false);
+    }
+
+    public function testRangeLen()
+    {
+        $v1 = validate("chase")->withRules(['rangeLen:5-10']);
+        $v2 = validate("chase")->withRules(['rangeLen:1-5']);
+        $v3 = validate("cha")->withRules(['rangeLen:5-10']);
+        $v4 = validate("chase")->withRules(['rangeLen:1-4']);
+        $this->assertEquals($v1->passes(), true);
+        $this->assertEquals($v2->passes(), true);
+        $this->assertEquals($v3->passes(), false);
+        $this->assertEquals($v4->passes(), false);
     }
 
     public function testLen()
@@ -166,7 +190,8 @@ class ValuesTest extends TestCase
         $this->assertEquals($v4->passes(), true);
     }
 
-    public function testRequired(){
+    public function testRequired()
+    {
         $v1 = validate('')->withRules(['required']);
         $v2 = validate(null)->withRules(['required']);
         $v3 = validate(false)->withRules(['required']);
@@ -178,25 +203,40 @@ class ValuesTest extends TestCase
         $this->assertEquals($v4->passes(), true);
     }
 
-    public function testUnique(){
-        $v1 = validate(5)->unique(function($subject){
+    public function testUnique()
+    {
+        $v1 = validate(5)->unique(function ($subject) {
             return false;
         });
-        $v2 = validate(5)->unique(function($subject){
+        $v2 = validate(5)->unique(function ($subject) {
             return true;
-        });        
+        });
 
         $this->assertEquals($v1->passes(), true);
         $this->assertEquals($v2->passes(), false);
     }
 
-    public function testExists(){
-        $v1 = validate(5)->exists(function($subject){
+    public function testExists()
+    {
+        $v1 = validate(5)->exists(function ($subject) {
             return false;
         });
-        $v2 = validate(5)->exists(function($subject){
+        $v2 = validate(5)->exists(function ($subject) {
             return true;
-        });        
+        });
+
+        $this->assertEquals($v1->passes(), false);
+        $this->assertEquals($v2->passes(), true);
+    }
+
+    public function testCheck()
+    {
+        $v1 = validate(5)->check(function () {
+            return false;
+        });
+        $v2 = validate(5)->check(function () {
+            return true;
+        });
 
         $this->assertEquals($v1->passes(), false);
         $this->assertEquals($v2->passes(), true);

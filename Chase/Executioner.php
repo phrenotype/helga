@@ -4,6 +4,9 @@ namespace Chase;
 
 use finfo;
 
+
+## Add range, and check methods
+
 class Executioner
 {
 
@@ -118,6 +121,36 @@ class Executioner
         }, $key);
     }
 
+    public static function range($target, $value, $key = null)
+    {
+        $pair = explode('-', $value);
+        if (count($pair) !== 2) {
+            throw new \Error("Invalid syntax for 'range'");
+        }
+        $min = $pair[0];
+        $max = $pair[1];
+        return self::exec(function () use ($min, $max, $target) {
+            return ($target <= $max && $target >= $min);
+        }, function ($r) use ($max, $min, $key) {
+            $r->message = sprintf("%s must be between %s and %s.", ucwords($key ?? 'Value'), number_format($min), number_format($max));
+        }, $key);
+    }
+
+    public static function rangeLen($target, $value, $key = null)
+    {
+        $pair = explode('-', $value);
+        if (count($pair) !== 2) {
+            throw new \Error("Invalid syntax for 'rangeLen'");
+        }
+        $min = $pair[0];
+        $max = $pair[1];
+        return self::exec(function () use ($target, $max, $min) {
+            return (mb_strlen($target) >= (int)$min && mb_strlen($target) <= (int)$max);
+        }, function ($r) use ($max, $min, $key) {
+            $r->message = sprintf("%s must have between %s and %s characters.", ucwords($key ?? 'value'), number_format($min), number_format($max));
+        }, $key);
+    }
+
 
     public static function regex($target, $regex, $key = null)
     {
@@ -132,6 +165,9 @@ class Executioner
     public static function in($target, $value, $key = null)
     {
         $array = explode(',', $value);
+        if (empty($array)) {
+            throw new \Error("Invalid syntax for 'in'.");
+        }
         return self::exec(function () use ($target, $array) {
             return (in_array($target, $array));
         }, function ($r) use ($array, $key) {
@@ -229,6 +265,18 @@ class Executioner
         }, $key);
     }
 
+    public static function check($target, $value, $key = null)
+    {
+        return self::exec(function () use ($value) {
+            if ($value == 'true') {
+                return true;
+            } else {
+                return false;
+            }
+        }, function ($r) use ($key) {
+            $r->message = sprintf("%s must pass the check.", ucwords($key ?? 'value'));
+        }, $key);
+    }
 
     public static function fileRequired($target, $key = null)
     {
@@ -291,6 +339,9 @@ class Executioner
     public static function mimes($target, $mimes, $key = null)
     {
         $array = explode(",", $mimes);
+        if (empty($array)) {
+            throw new \Error("Invalid syntax for 'mimes'.");
+        }
         return self::exec(function () use ($target, $array) {
             $mime = new finfo(FILEINFO_MIME);
             $mime = $mime->file($target);
@@ -305,6 +356,9 @@ class Executioner
     public static function mimeTypes($target, $types, $key = null)
     {
         $array = explode(",", $types);
+        if (empty($array)) {
+            throw new \Error("Invalid syntax for 'mimeTypes'.");
+        }
         return self::exec(function () use ($target, $array) {
             $mime = new finfo(FILEINFO_MIME);
             $mime = $mime->file($target);

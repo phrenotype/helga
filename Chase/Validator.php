@@ -107,10 +107,18 @@ class Validator
         if ($this->__isSingleSubject__) {
             return $this->errors();
         } else {
-            $errors = array_values($this->errors());
-            return array_reduce($errors, function ($c, $i) {
-                return array_merge($c, $i);
-            }, []);
+            if ($firstOnly) {
+                $errors = array_values($this->errors());
+                return array_reduce($errors, function ($c, $i) {
+                    $c[] = $i[0];
+                    return $c;
+                }, []);
+            } else {
+                $errors = array_values($this->errors());
+                return array_reduce($errors, function ($c, $i) {
+                    return array_merge($c, $i);
+                }, []);
+            }
         }
     }
 
@@ -181,6 +189,22 @@ class Validator
         } else {
             throw new \Error(sprintf("Invalid number of arguments for %s::%s", self::class, 'exists'));
         }
+
+        return $this;
+    }
+
+    /**
+     * Adds a rule for custom validation
+     * 
+     * @param callable $checker A function that performs the custom validation.
+     * @return Chase\Validator
+     */
+    public function check(callable $checker)
+    {
+        $val = $checker($this->__subject__);
+        $val = ($val) ? "true" : "false";
+
+        $this->__rules__[] = 'check:' . $val;
 
         return $this;
     }
