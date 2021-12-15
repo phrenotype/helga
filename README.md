@@ -8,7 +8,7 @@
 
 This is a library for validation with easy customization of error messages. It validates everything from variables to files. It is not limited to form validation.
 
-It has a clean and easy syntax with not clutters. Additionally, there are no external dependencies, apart from php, of course :).
+It has a clean and easy syntax with no clutters. Additionally, there are no external dependencies, apart from php, of course :).
 
 ## INSTALL
 `composer require chase/chase`  
@@ -124,7 +124,7 @@ The only required field is the directive, like `required`, `min`, `fileImage` e.
 
 The arguments are only required if the directive requires arguments. For instance `integer`, `email` or `url` do not require arguments, but `minLen`, `max` or `min` require arguments.  
 
-Finally, you can pass a custom error message as a third parameter.
+Finally, you can pass a custom error message as a third argument.
 
 ### CUSTOM ERROR MESSAGES
 
