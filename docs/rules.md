@@ -265,7 +265,7 @@ $v = validate($path)->withRules(['filePdf']);
 ```
 
 `fileOffice`  
-The path passed must point to a valid office file. That is one of : `doc, ppt, xls, msi, msg`. Not any of `docx, pptx, xlsx`.
+The path passed must point to a valid office file. That is one of : `doc, ppt, and xls`. Not any of `docx, pptx, xlsx`.
 ```php
 $path = '/files/doc.doc';
 $v = validate($path)->withRules(['fileOffice']);
