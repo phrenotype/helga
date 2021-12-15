@@ -158,4 +158,9 @@ $v = validate("c")->withRules([
 var_dump($v->errors());
 ```
 
+## DONATIONS
+If you wish to help fund this project, you can donate via bitcoin to `wallet address`.  
+
+## IN SUMMARY...
+Happy validation !!! :)
 

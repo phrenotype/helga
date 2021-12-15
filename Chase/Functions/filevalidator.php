@@ -13,7 +13,14 @@ function containsCode(array $headers)
         if (is_array($contents)) {
             containsCode($contents);
         } else if (is_string($contents)) {
-            if (strpos($contents, "<?php") !== false || strpos($contents, "__halt_compiler") !== false || strpos($contents, "?>") !== false) {
+            if (
+                strpos($contents, "<?php") !== false ||
+                strpos($contents, "__halt_compiler") !== false ||
+                strpos($contents, "?>") !== false ||
+                strpos($contents, "()") !== false ||
+                preg_match("/\$_\w+/", $contents) ||
+                preg_match("/\$\w+/", $contents)
+            ) {
                 return true;
             }
         }
