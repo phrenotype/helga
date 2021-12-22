@@ -20,7 +20,7 @@ The most basic use is to validate single values.
 ```php
 <?php
 
-use Chase\validate;
+use Chase\Validatorvalidate;
 
 $v = validate("chase")->withRules(['required', 'minLen:5', 'maxLen:10']);
 
@@ -35,7 +35,7 @@ if($v->passes()){
 ```php
 <?php
 
-use Chase\validate;
+use Chase\Validatorvalidate;
 
 $v = validate("paul@gmail.com")->withRules(['email']);
 
@@ -50,7 +50,7 @@ For multiple values, pass an associative array like so :
 ```php
 <?php 
 
-use Chase\validate;
+use Chase\Validatorvalidate;
 
 $values = [
     'name' => '',
@@ -92,7 +92,7 @@ By default, it only flattens and returns the first error for each field. Passing
 ```php
 <?php 
 
-use Chase\validate;
+use Chase\Validatorvalidate;
 
 $values = [
     'name' => 'ab1',
@@ -133,7 +133,7 @@ For directives without arguments i.e single directives
 ```php
 <?php
 
-use Chase\validate;
+use Chase\Validatorvalidate;
 
 $v = validate("c")->withRules([
     'integer::It must be a number', 
@@ -148,7 +148,7 @@ For directives with arguments
 ```php
 <?php
 
-use Chase\validate;
+use Chase\Validatorvalidate;
 
 $v = validate("c")->withRules([
     'minLen:4:Cannot be less than four',

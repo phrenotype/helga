@@ -1,6 +1,6 @@
 <?php
 
-namespace Chase;
+namespace Chase\Validator;
 
 /**
  * Holds the value following a rule evaluation

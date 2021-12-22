@@ -22,7 +22,7 @@
             "Chase\\" : "Chase/",
             "Tests\\" : "Tests/"
         },
-        "files" : ["Chase/Functions/include.php"]
+        "files" : ["Chase/Validator/Functions/include.php"]
     },
     "require" : {
         "php" : ">=7.0.0"

@@ -1,6 +1,6 @@
 <?php
 
-namespace Chase;
+namespace Chase\Validator;
 
 use finfo;
 
@@ -59,7 +59,7 @@ function isImage(string $path)
 
     $supported = [IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_WEBP];
 
-    $type = exif_imagetype($path);
+    $type = @exif_imagetype($path);
     if (!in_array($type, $supported)) {
         return false;
     }
@@ -67,9 +67,8 @@ function isImage(string $path)
     if (!hasMime($path, ['image/jpeg', 'image/png', 'image/gif', 'image/webp'])) {
         return false;
     }
-
-    //Use exif_read_data to determine if it has any php code in it
-    $data = exif_read_data($path);
+    
+    $data = @exif_read_data($path);
     if (is_array($data)) {
         if (containsCode($data)) {
             return false;

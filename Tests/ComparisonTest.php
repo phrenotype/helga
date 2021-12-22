@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-use function Chase\validate;
+use function Chase\Validator\validate;
 
 class ComparisonTest extends TestCase
 {
