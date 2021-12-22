@@ -4,9 +4,6 @@ namespace Chase\Validator;
 
 use finfo;
 
-
-## Add range, and check methods
-
 class Executioner
 {
 

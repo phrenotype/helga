@@ -125,7 +125,7 @@ class Validator
     /**
      * Adds a rule to check if a value is unique
      * 
-     * @return Chase\ValidatorValidator
+     * @return Chase\Validator\Validator
      */
     public function unique(...$args)
     {
@@ -160,7 +160,7 @@ class Validator
     /**
      * Adds a rule to check if a value exists
      * 
-     * @return Chase\ValidatorValidator
+     * @return Chase\Validator\Validator
      */
     public function exists(...$args)
     {
@@ -197,7 +197,7 @@ class Validator
      * Adds a rule for custom validation
      * 
      * @param callable $checker A function that performs the custom validation.
-     * @return Chase\ValidatorValidator
+     * @return Chase\Validator\Validator
      */
     public function check(callable $checker)
     {
@@ -210,10 +210,10 @@ class Validator
     }
 
     /**
-     * Pass an associative array of rules to an instance of Chase\ValidatorValidator.
+     * Pass an associative array of rules to an instance of Chase\Validator\Validator.
      * 
      * @param array $rules
-     * @return Chase\ValidatorValidator Returns the validator it was called on
+     * @return Chase\Validator\Validator Returns the validator it was called on
      */
     public function withRules(array $rules)
     {
