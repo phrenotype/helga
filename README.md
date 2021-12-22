@@ -1,4 +1,4 @@
-# Chase
+# Chase Validator
 ![github stars](https://img.shields.io/github/stars/jameshadleychase/chase?style=social)
 ![packagist stars](https://img.shields.io/packagist/stars/chase/chase)
 ![license](https://img.shields.io/github/license/jameshadleychase/chase)
