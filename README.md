@@ -11,7 +11,7 @@ This is a library for validation with easy customization of error messages. It v
 It has a clean and easy syntax with no clutters. Additionally, there are no external dependencies, apart from php, of course :).
 
 ## INSTALL
-`composer require chase/chase`  
+`composer require chase/validator`  
 
 ## USAGE
 
@@ -157,9 +157,6 @@ $v = validate("c")->withRules([
 
 var_dump($v->errors());
 ```
-
-## DONATIONS
-If you wish to help fund this project, you can donate via bitcoin to `wallet address`.  
 
 ## IN SUMMARY...
 Happy validation !!! :)
