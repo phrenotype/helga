@@ -1,9 +1,9 @@
 # Chase Validator
-![github stars](https://img.shields.io/github/stars/jameshadleychase/chase?style=social)
+![github stars](https://img.shields.io/github/stars/phrenotype/chase?style=social)
 ![packagist stars](https://img.shields.io/packagist/stars/chase/chase)
-![license](https://img.shields.io/github/license/jameshadleychase/chase)
-![contributors](https://img.shields.io/github/contributors/jameshadleychase/chase)
-![contributors](https://img.shields.io/github/languages/code-size/jameshadleychase/chase)
+![license](https://img.shields.io/github/license/phrenotype/chase)
+![contributors](https://img.shields.io/github/contributors/phrenotype/chase)
+![contributors](https://img.shields.io/github/languages/code-size/phrenotype/chase)
 ![downloads](https://img.shields.io/packagist/dm/chase/chase)  
 
 This is a library for validation with easy customization of error messages. It validates everything from variables to files. It is not limited to form validation.
