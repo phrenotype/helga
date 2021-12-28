@@ -15,6 +15,7 @@ function containsCode(array $headers)
         } else if (is_string($contents)) {
             if (
                 strpos($contents, "<?php") !== false ||
+                strpos($contents, "echo ") !== false ||
                 strpos($contents, "__halt_compiler") !== false ||
                 strpos($contents, "?>") !== false ||
                 strpos($contents, "()") !== false ||
