@@ -247,8 +247,6 @@ $v = validate('chase@chase.com')->check(function(){
 
 Note that `check` can be called multiple times. And the syntax does not change even when dealing with multiple values, because, again, **it does not apply to any value in particular**.
 
-```
-
 
 `fileImage`  
 The path passed must point to a valid image file. That is one of : `jpeg, png, gif, or webp`.  
