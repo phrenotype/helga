@@ -156,7 +156,10 @@ $v = validate("c")->withRules([
     ]);
 
 var_dump($v->errors());
-```
+```  
+
+## CONTACT
+**Email** : paul.contrib@gmail.com
 
 ## IN SUMMARY...
 Happy validation !!! :)
