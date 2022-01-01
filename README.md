@@ -1,4 +1,4 @@
-# Chase Validator
+# Helga
 ![github stars](https://img.shields.io/github/stars/phrenotype/helga?style=social)
 ![packagist stars](https://img.shields.io/packagist/stars/chase/helga)
 ![license](https://img.shields.io/github/license/phrenotype/helga)
@@ -10,10 +10,10 @@ This is a library for validation with easy customization of error messages. It v
 
 It has a clean and easy syntax with no clutters. Additionally, there are no external dependencies, apart from php, of course :).
 
-## INSTALL
+## Install
 `composer require chase/helga`  
 
-## USAGE
+## Usage
 
 The most basic use is to validate single values.
 
@@ -80,7 +80,7 @@ The variable `$values` above could be any associative array, including super glo
 
 **A complete list of the rule directives can be found [ here ]( docs/rules.md )**
 
-### RETRIEVING ERROR MESSAGES
+### Retrieving Error Messages
 You will notice that the method `->errors()` is used to retrieve error messages. This is okay if you are only validating one value.  
 
 When validating multiple values, the errors come back as an associative array, with the key being the the name of the field, and the value being an array of all the errors associated with the field.
@@ -115,7 +115,7 @@ var_dump($v->flatErrors(false));
 
 ```  
 
-### ANATOMY OF A DIRECTIVE  
+### Anatomy Of A Directive
 The first thing to notice is the syntax of a rule.  
 
 `directive[:arguments][:customMessage]`  
@@ -126,7 +126,7 @@ The arguments are only required if the directive requires arguments. For instanc
 
 Finally, you can pass a custom error message as a third argument.
 
-### CUSTOM ERROR MESSAGES
+### Custom Error Messages
 
 For directives without arguments i.e single directives  
 
@@ -158,9 +158,9 @@ $v = validate("c")->withRules([
 var_dump($v->errors());
 ```  
 
-## CONTACT
+## Contact
 **Email** : paul.contrib@gmail.com
 
-## IN SUMMARY...
+## In Summary...
 Happy validation !!! :)
 
