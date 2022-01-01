@@ -1,6 +1,6 @@
 <?php
 
-namespace Chase\Validator;
+namespace Chase\Helga;
 
 /**
  * Holds the value following a rule evaluation

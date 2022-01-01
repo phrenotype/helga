@@ -1,6 +1,6 @@
 <?php
 
-namespace Chase\Validator;
+namespace Chase\Helga;
 
 class ValidationState
 {

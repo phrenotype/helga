@@ -1,5 +1,5 @@
 {
-    "name": "chase/validator",
+    "name": "chase/helga",
     "description": "Validation at it's best - variables, forms and files",
     "type": "library",
     "keywords": [
@@ -22,7 +22,7 @@
             "Chase\\" : "Chase/",
             "Tests\\" : "Tests/"
         },
-        "files" : ["Chase/Validator/Functions/include.php"]
+        "files" : ["Chase/Helga/Functions/include.php"]
     },
     "require" : {
         "php" : ">=7.0.0"

@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-use function Chase\Validator\validate;
+use function Chase\Helga\validate;
 
 class FilesTest extends TestCase
 {
