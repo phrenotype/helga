@@ -7,26 +7,40 @@ use finfo;
 const PDF_MAGIC = "\x25\x50\x44\x46\x2D";
 const OFFICE_MAGIC = "\xD0\xCF\x11\xE0\xA1\xB1\x1A\xE1";
 
+function hasCode(string $string)
+{
+    return (
+        strpos($string, "<?php") !== false ||
+        strpos($string, "echo ") !== false ||
+        strpos($string, "__halt_compiler") !== false ||
+        strpos($string, "?>") !== false ||
+        strpos($string, "()") !== false ||
+        preg_match("/\$_\w+/", $string) ||
+        preg_match("/\$\w+/", $string)
+    );
+}
+
 function containsCode(array $headers)
 {
     foreach ($headers as $title => $contents) {
         if (is_array($contents)) {
             containsCode($contents);
         } else if (is_string($contents)) {
-            if (
-                strpos($contents, "<?php") !== false ||
-                strpos($contents, "echo ") !== false ||
-                strpos($contents, "__halt_compiler") !== false ||
-                strpos($contents, "?>") !== false ||
-                strpos($contents, "()") !== false ||
-                preg_match("/\$_\w+/", $contents) ||
-                preg_match("/\$\w+/", $contents)
-            ) {
+            if (hasCode($contents)) {
                 return true;
             }
         }
     }
 }
+
+function rawContainsCode(string $path)
+{
+    $contents = file_get_contents($path);
+    if(hasCode($contents)){
+        return true;
+    }
+}
+
 
 /**
  * Checks if a file is one of several mimes.
@@ -68,12 +82,16 @@ function isImage(string $path)
     if (!hasMime($path, ['image/jpeg', 'image/png', 'image/gif', 'image/webp'])) {
         return false;
     }
-    
+
     $data = @exif_read_data($path);
     if (is_array($data)) {
         if (containsCode($data)) {
             return false;
         }
+    }
+
+    if (rawContainsCode($path)) {
+        return false;
     }
 
     $image = false;
