@@ -51,6 +51,9 @@ function rawContainsCode(string $path)
  */
 function hasMime(string $path, array $mimes)
 {
+    if (rawContainsCode($path)) {
+        return false;
+    }
     $fn = new finfo(FILEINFO_MIME);
     $mime = $fn->file($path);
     preg_match("/^[^;]+/", $mime, $part);
