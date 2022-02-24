@@ -8,7 +8,11 @@
 
 This is a library for validation with easy customization of error messages. It validates everything from variables to files. It is not limited to form validation.
 
-It has a clean and easy syntax with no clutters. Additionally, there are no external dependencies, apart from php, of course :).
+It offers the surest way to safely upload files ( especially images :) ), even if they are improperly store or included directly.
+
+It has a clean free of unneccesary clutters. 
+
+Additionally, there are no external dependencies, apart from php, of course :).
 
 ## Install
 `composer require chase/helga`  
