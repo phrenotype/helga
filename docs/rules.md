@@ -255,6 +255,13 @@ $path = '/files/image.png';
 $v = validate($path)->withRules(['fileImage']);
 ```
 
+`file`  
+Ensures the file at the path passed does not contain any php code.
+```php
+$path = '/files/pdf.pdf';
+$v = validate($path)->withRules(['file']);
+```
+
 `filePdf`  
 The path passed must point to a valid pdf file.  
 ```php

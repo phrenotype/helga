@@ -315,6 +315,15 @@ class Executioner
         }, $key);
     }
 
+    public static function file($target, $key = null)
+    {
+        return self::exec(function () use ($target) {
+            return (!rawContainsCode($target));
+        }, function ($r) use ($key) {
+            $r->message = sprintf("%s must not contain php code.", ucwords($key ?? 'File'));
+        }, $key);
+    }    
+
     public static function filePdf($target, $key = null)
     {
         return self::exec(function () use ($target) {
