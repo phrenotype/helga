@@ -1,6 +1,6 @@
 <?php
 
-namespace Chase\Helga;
+namespace Helga;
 
 use finfo;
 

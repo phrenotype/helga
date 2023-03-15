@@ -1,5 +1,5 @@
 {
-    "name": "chase/helga",
+    "name": "helga/helga",
     "description": "Validation at it's best - variables, forms and files",
     "type": "library",
     "keywords": [
@@ -20,10 +20,10 @@
     ],
     "autoload": {
         "psr-4" : {
-            "Chase\\" : "Chase/",
+            "Helga\\" : "Helga/",
             "Tests\\" : "Tests/"
         },
-        "files" : ["Chase/Helga/Functions/include.php"]
+        "files" : ["Helga/Functions/include.php"]
     },
     "require" : {
         "php" : ">=7.0.0"

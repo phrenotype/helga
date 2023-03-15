@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-use function Chase\Helga\validate;
+use function Helga\validate;
 
 class ComparisonTest extends TestCase
 {

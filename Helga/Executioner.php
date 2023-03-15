@@ -1,6 +1,6 @@
 <?php
 
-namespace Chase\Helga;
+namespace Helga;
 
 use finfo;
 
@@ -176,7 +176,7 @@ class Executioner
     public static function integer($target, $key = null)
     {
         return self::exec(function () use ($target) {
-            return (ctype_digit($target));
+            return (ctype_digit((string)$target));
         }, function ($r) use ($key) {
             $r->message = sprintf("%s can only contain numbers.", ucwords($key ?? 'value'));
         }, $key);
@@ -185,7 +185,7 @@ class Executioner
     public static function alnum($target, $key = null)
     {
         return self::exec(function () use ($target) {
-            return (ctype_alnum($target));
+            return (ctype_alnum((string)$target));
         }, function ($r) use ($key) {
             $r->message = sprintf("%s can only contain alphabets and numbers.", ucwords($key ?? 'value'));
         }, $key);
@@ -194,7 +194,7 @@ class Executioner
     public static function alpha($target, $key = null)
     {
         return self::exec(function () use ($target) {
-            return (ctype_alpha($target));
+            return (ctype_alpha((string)$target));
         }, function ($r) use ($key) {
             $r->message = sprintf("%s can only contain alphabets.", ucwords($key ?? 'value'));
         }, $key);

@@ -1,6 +1,6 @@
 <?php
 
-namespace Chase\Helga;
+namespace Helga;
 
 /**
  * A function that wraps instantiation of Chase\Helga\Validator Objects
