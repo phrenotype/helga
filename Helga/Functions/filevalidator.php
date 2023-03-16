@@ -10,13 +10,11 @@ const OFFICE_MAGIC = "\xD0\xCF\x11\xE0\xA1\xB1\x1A\xE1";
 function hasCode(string $string)
 {
     return (
-        strpos($string, "<?php") !== false ||
-        strpos($string, "echo ") !== false ||
-        strpos($string, "__halt_compiler") !== false ||
-        strpos($string, "?>") !== false ||
-        strpos($string, "()") !== false ||
-        preg_match("/\$_\w+/", $string) ||
-        preg_match("/\$\w+/", $string)
+        (strpos($string, "<?php") !== false) ||
+        (strpos($string, " echo ") !== false) ||
+        (strpos($string, "__halt_compiler") !== false) ||           
+        preg_match("/\b\$_GET+/", $string) ||
+        preg_match("/\b\$_POST+/", $string)
     );
 }
 
@@ -35,7 +33,7 @@ function containsCode(array $headers)
 
 function rawContainsCode(string $path)
 {
-    $contents = file_get_contents($path);
+    $contents = file_get_contents($path);      
     if(hasCode($contents)){
         return true;
     }
@@ -53,7 +51,8 @@ function hasMime(string $path, array $mimes)
 {
     if (rawContainsCode($path)) {
         return false;
-    }
+    }    
+
     $fn = new finfo(FILEINFO_MIME);
     $mime = $fn->file($path);
     preg_match("/^[^;]+/", $mime, $part);
@@ -71,20 +70,20 @@ function hasMime(string $path, array $mimes)
 function isImage(string $path)
 {
 
-    if (!is_readable($path)) {
+    if (!is_readable($path)) {          
         return false;
-    }
+    }    
 
     $supported = [IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_WEBP];
 
     $type = @exif_imagetype($path);
-    if (!in_array($type, $supported)) {
+    if (!in_array($type, $supported)) {        
         return false;
     }
 
-    if (!hasMime($path, ['image/jpeg', 'image/png', 'image/gif', 'image/webp'])) {
+    if (!hasMime($path, ['image/jpeg', 'image/png', 'image/gif', 'image/webp'])) {        
         return false;
-    }
+    }    
 
     $data = @exif_read_data($path);
     if (is_array($data)) {
@@ -100,16 +99,16 @@ function isImage(string $path)
     $image = false;
     switch ($type) {
         case IMAGETYPE_GIF:
-            $image = @imagecreatefromgif($path);
+            $image = imagecreatefromgif($path);
             break;
         case IMAGETYPE_PNG:
-            $image = @imagecreatefrompng($path);
+            $image = imagecreatefrompng($path);
             break;
         case IMAGETYPE_JPEG:
-            $image = @imagecreatefromjpeg($path);
+            $image = imagecreatefromjpeg($path);
             break;
         case IMAGETYPE_WEBP:
-            $image = @imagecreatefromwebp($path);
+            $image = imagecreatefromwebp($path);
             break;
     }
     return (!!$image);
@@ -123,10 +122,10 @@ function isImage(string $path)
  * @return bool
  */
 function isPDF($path)
-{
-    if (!is_readable($path) || !hasMime($path, ['application/pdf'])) {
+{    
+    if (!is_readable($path) || !hasMime($path, ['application/pdf', 'application/x-pdf'])) {        
         return false;
-    }
+    }    
     return (file_get_contents($path, false, null, 0, strlen(PDF_MAGIC)) === PDF_MAGIC) ? true : false;
 }
 

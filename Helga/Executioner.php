@@ -318,9 +318,13 @@ class Executioner
     public static function file($target, $key = null)
     {
         return self::exec(function () use ($target) {
-            return (!rawContainsCode($target));
+            if(is_readable($target) && file_exists($target)){
+                return (!rawContainsCode($target));
+            }else{
+                return false;
+            }
         }, function ($r) use ($key) {
-            $r->message = sprintf("%s must not contain php code.", ucwords($key ?? 'File'));
+            $r->message = sprintf("%s must be readable, exist, and not contain php code.", ucwords($key ?? 'File'));
         }, $key);
     }    
 

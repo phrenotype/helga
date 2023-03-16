@@ -71,7 +71,7 @@ class FilesTest extends TestCase
 
         $v1 = validate($this->base . 'jpg.jpg')->withRules(['filePdf']);
         $v2 = validate($this->base . 'doc.doc')->withRules(['filePdf']);
-        $v3 = validate($this->base . 'pdf.pdf')->withRules(['filePdf']);
+        $v3 = validate($this->base . 'progit.pdf')->withRules(['filePdf']);
         $v4 = validate($this->base . 'png.png')->withRules(['filePdf']);
 
         $this->assertEquals($v1->passes(), false);

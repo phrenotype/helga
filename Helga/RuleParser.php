@@ -27,8 +27,8 @@ class RuleParser
 
         if (is_string(array_keys($this->__rules__)[0])) {
             $state->isSingle = false;
-            $state->failed = false;
-            $state->passed = true;
+            $state->failed = true;
+            $state->passed = false;
             foreach ($this->__rules__ as $k => $rule) {
                 if (!isset($state->errors[$k])) {
                     $state->errors[$k] = [];
@@ -60,7 +60,7 @@ class RuleParser
                 }
 
                 if (preg_match("/^(file|mime)/", $function) && $function !== 'fileRequired' && (!is_readable($subject))) {
-                    continue;
+                    //continue;
                 }
 
 
@@ -78,15 +78,13 @@ class RuleParser
 
                 if ($key) {
                     $params[] = $key;
-                }
-
-                //echo $function . '|' . join(',', $params) . PHP_EOL;
+                }                
 
                 if (!method_exists(Executioner::class, $function)) {
                     throw new \Error(sprintf("Unknown rule directive '%s'.", $function));
                 }
 
-                $eval = call_user_func_array(Executioner::class . "::" . $function, $params);
+                $eval = call_user_func_array(Executioner::class . "::" . $function, $params);                
                 
                 if (!$eval->return) {
                     if ($message) {
