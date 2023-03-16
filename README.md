@@ -1,10 +1,9 @@
 # Helga
 ![github stars](https://img.shields.io/github/stars/phrenotype/helga?style=social)
-![packagist stars](https://img.shields.io/packagist/stars/helga/helga)
 ![license](https://img.shields.io/github/license/phrenotype/helga)
 ![contributors](https://img.shields.io/github/contributors/phrenotype/helga)
-![contributors](https://img.shields.io/github/languages/code-size/phrenotype/helga)
-![downloads](https://img.shields.io/packagist/dm/helga/helga)  
+![code size](https://img.shields.io/github/languages/code-size/phrenotype/helga)
+
 
 This is a library for validation with easy customization of error messages. It validates everything from variables to files. It is not limited to form validation.
 
