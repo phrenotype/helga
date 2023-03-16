@@ -1,10 +1,10 @@
 # Helga
 ![github stars](https://img.shields.io/github/stars/phrenotype/helga?style=social)
-![packagist stars](https://img.shields.io/packagist/stars/chase/helga)
+![packagist stars](https://img.shields.io/packagist/stars/helga/helga)
 ![license](https://img.shields.io/github/license/phrenotype/helga)
 ![contributors](https://img.shields.io/github/contributors/phrenotype/helga)
 ![contributors](https://img.shields.io/github/languages/code-size/phrenotype/helga)
-![downloads](https://img.shields.io/packagist/dm/chase/helga)  
+![downloads](https://img.shields.io/packagist/dm/helga/helga)  
 
 This is a library for validation with easy customization of error messages. It validates everything from variables to files. It is not limited to form validation.
 
@@ -15,7 +15,7 @@ It has a clean free of unneccesary clutters.
 Additionally, there are no external dependencies, apart from php, of course :).
 
 ## Install
-`composer require chase/helga`  
+`composer require helga/helga`  
 
 ## Usage
 
@@ -24,7 +24,7 @@ The most basic use is to validate single values.
 ```php
 <?php
 
-use Chase\Helga\validate;
+use Helga\validate;
 
 $v = validate("chase")->withRules(['required', 'minLen:5', 'maxLen:10']);
 
@@ -39,7 +39,7 @@ if($v->passes()){
 ```php
 <?php
 
-use Chase\Helga\validate;
+use Helga\validate;
 
 $v = validate("paul@gmail.com")->withRules(['email']);
 
@@ -54,7 +54,7 @@ For multiple values, pass an associative array like so :
 ```php
 <?php 
 
-use Chase\Helga\validate;
+use Helga\validate;
 
 $values = [
     'name' => '',
@@ -96,7 +96,7 @@ By default, it only flattens and returns the first error for each field. Passing
 ```php
 <?php 
 
-use Chase\Helga\validate;
+use Helga\validate;
 
 $values = [
     'name' => 'ab1',
@@ -137,7 +137,7 @@ For directives without arguments i.e single directives
 ```php
 <?php
 
-use Chase\Helga\validate;
+use Helga\validate;
 
 $v = validate("c")->withRules([
     'integer::It must be a number', 
@@ -152,7 +152,7 @@ For directives with arguments
 ```php
 <?php
 
-use Chase\Helga\validate;
+use Helga\validate;
 
 $v = validate("c")->withRules([
     'minLen:4:Cannot be less than four',
@@ -166,5 +166,5 @@ var_dump($v->errors());
 **Email** : paul.contrib@gmail.com
 
 ## In Summary...
-Happy validation !!! :)
+Happy validation :)
 
