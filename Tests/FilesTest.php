@@ -6,6 +6,7 @@ use function Helga\validate;
 
 class FilesTest extends TestCase
 {
+    private $base = "";
 
     protected function setUp(): void
     {

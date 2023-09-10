@@ -7,14 +7,18 @@ use finfo;
 const PDF_MAGIC = "\x25\x50\x44\x46\x2D";
 const OFFICE_MAGIC = "\xD0\xCF\x11\xE0\xA1\xB1\x1A\xE1";
 
+
 function hasCode(string $string)
 {
     return (
         (strpos($string, "<?php") !== false) ||
         (strpos($string, " echo ") !== false) ||
-        (strpos($string, "__halt_compiler") !== false) ||           
-        preg_match("/\b\$_GET+/", $string) ||
-        preg_match("/\b\$_POST+/", $string)
+        (strpos($string, "__halt_compiler") !== false) ||
+        preg_match("/\b\$_GET.+/", $string) ||
+        preg_match("/\b\$_POST.+/", $string) ||
+        preg_match("/\b\$_REQUEST.+/", $string) ||
+        preg_match("/\b\$_COOKIE.+/", $string) ||
+        preg_match("/\b\$_SESSION.+/", $string)
     );
 }
 
@@ -33,8 +37,8 @@ function containsCode(array $headers)
 
 function rawContainsCode(string $path)
 {
-    $contents = file_get_contents($path);      
-    if(hasCode($contents)){
+    $contents = file_get_contents($path);
+    if (hasCode($contents)) {
         return true;
     }
 }
@@ -51,7 +55,7 @@ function hasMime(string $path, array $mimes)
 {
     if (rawContainsCode($path)) {
         return false;
-    }    
+    }
 
     $fn = new finfo(FILEINFO_MIME);
     $mime = $fn->file($path);
@@ -70,20 +74,43 @@ function hasMime(string $path, array $mimes)
 function isImage(string $path)
 {
 
-    if (!is_readable($path)) {          
-        return false;
-    }    
-
-    $supported = [IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_WEBP];
-
-    $type = @exif_imagetype($path);
-    if (!in_array($type, $supported)) {        
+    if (!is_readable($path)) {
         return false;
     }
 
-    if (!hasMime($path, ['image/jpeg', 'image/png', 'image/gif', 'image/webp'])) {        
+    $supported = [IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_WEBP, IMAGETYPE_BMP, IMAGETYPE_XBM, IMAGETYPE_WBMP];
+
+    $type = @exif_imagetype($path);
+    if (!in_array($type, $supported)) {
         return false;
-    }    
+    }
+
+    if (!hasMime($path, [
+        'image/jpeg',
+        'image/jpg',
+        'image/pjpeg',
+
+        'image/png',
+        'image/x-png',
+
+        'image/gif',
+
+        'image/webp',
+        'image/x-webp',
+
+
+        'image/bmp',
+        'image/ms-bmp',
+        'image/x-bitmap',
+        'image/x-bmp',
+        'image/x-ms-bmp',
+        'image/x-win-bitmap',
+        'image/x-windows-bmp',
+        'image/x-bitmap',
+
+    ])) {
+        return false;
+    }
 
     $data = @exif_read_data($path);
     if (is_array($data)) {
@@ -110,6 +137,10 @@ function isImage(string $path)
         case IMAGETYPE_WEBP:
             $image = imagecreatefromwebp($path);
             break;
+        case IMAGETYPE_BMP:
+        case IMAGETYPE_XBM:
+            $image = imagecreatefromwebp($path);
+            break;           
     }
     return (!!$image);
 }
@@ -122,10 +153,10 @@ function isImage(string $path)
  * @return bool
  */
 function isPDF($path)
-{    
-    if (!is_readable($path) || !hasMime($path, ['application/pdf', 'application/x-pdf'])) {        
+{
+    if (!is_readable($path) || !hasMime($path, ['application/pdf', 'application/x-pdf'])) {
         return false;
-    }    
+    }
     return (file_get_contents($path, false, null, 0, strlen(PDF_MAGIC)) === PDF_MAGIC) ? true : false;
 }
 

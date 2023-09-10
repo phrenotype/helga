@@ -6,6 +6,8 @@ use function Helga\validate;
 
 class CustomMessagesTest extends TestCase
 {
+    private $customMessage = "";
+    
     protected function setUp(): void
     {
         $this->customMessage = "This is my custom message";
