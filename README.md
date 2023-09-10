@@ -14,7 +14,7 @@ It has a clean free of unneccesary clutters.
 Additionally, there are no external dependencies, apart from php, of course :).
 
 ## Install
-`composer require helga/helga`  
+```composer require helga/helga```
 
 ## Usage
 
@@ -23,7 +23,7 @@ The most basic use is to validate single values.
 ```php
 <?php
 
-use Helga\validate;
+use function Helga\validate;
 
 $v = validate("chase")->withRules(['required', 'minLen:5', 'maxLen:10']);
 
@@ -38,7 +38,7 @@ if($v->passes()){
 ```php
 <?php
 
-use Helga\validate;
+use function Helga\validate;;
 
 $v = validate("paul@gmail.com")->withRules(['email']);
 
@@ -53,7 +53,7 @@ For multiple values, pass an associative array like so :
 ```php
 <?php 
 
-use Helga\validate;
+use function Helga\validate;
 
 $values = [
     'name' => '',
@@ -95,7 +95,7 @@ By default, it only flattens and returns the first error for each field. Passing
 ```php
 <?php 
 
-use Helga\validate;
+use function Helga\validate;
 
 $values = [
     'name' => 'ab1',
@@ -136,7 +136,7 @@ For directives without arguments i.e single directives
 ```php
 <?php
 
-use Helga\validate;
+use function Helga\validate;
 
 $v = validate("c")->withRules([
     'integer::It must be a number', 
@@ -151,7 +151,7 @@ For directives with arguments
 ```php
 <?php
 
-use Helga\validate;
+use function Helga\validate;
 
 $v = validate("c")->withRules([
     'minLen:4:Cannot be less than four',
@@ -162,7 +162,7 @@ var_dump($v->errors());
 ```  
 
 ## Contact
-**Email** : paul.contrib@gmail.com
+**Email** : dev@paulrobert.xyz
 
 ## In Summary...
 Happy validation :)
