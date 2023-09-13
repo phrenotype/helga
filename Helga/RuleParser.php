@@ -27,8 +27,6 @@ class RuleParser
 
         if (is_string(array_keys($this->__rules__)[0])) {
             $state->isSingle = false;
-            $state->failed = true;
-            $state->passed = false;
             foreach ($this->__rules__ as $k => $rule) {
                 if (!isset($state->errors[$k])) {
                     $state->errors[$k] = [];
@@ -37,8 +35,6 @@ class RuleParser
                 $validator = new Validator($value, $k);
                 $validator->withRules($rule);
                 $state->errors[$k] = array_merge($state->errors[$k], $validator->errors());
-                $state->failed = ($state->failed || $validator->fails());
-                $state->passed = ($state->passed && $validator->passes());
             }
             foreach ($state->errors as $i => $arr) {
                 if (empty($arr)) {
@@ -78,14 +74,14 @@ class RuleParser
 
                 if ($key) {
                     $params[] = $key;
-                }                
+                }
 
                 if (!method_exists(Executioner::class, $function)) {
                     throw new \Error(sprintf("Unknown rule directive '%s'.", $function));
                 }
 
-                $eval = call_user_func_array(Executioner::class . "::" . $function, $params);                
-                
+                $eval = call_user_func_array(Executioner::class . "::" . $function, $params);
+
                 if (!$eval->return) {
                     if ($message) {
                         $eval->message = $message;
@@ -97,13 +93,6 @@ class RuleParser
             throw new \Error("Invalid rules format");
         }
 
-        if (empty($errors)) {
-            $state->failed = false;
-            $state->passed = true;
-        } else {
-            $state->failed = true;
-            $state->passed = false;
-        }
         $state->errors = $errors;
         return $state;
     }

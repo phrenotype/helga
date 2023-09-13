@@ -5,7 +5,13 @@ namespace Helga;
 class ValidationState
 {
     public $isSingle;
-    public $passed;
-    public $failed;
     public $errors = [];
+
+    public function passed(){
+        return empty($this->errors) === true;
+    }
+
+    public function failed(){
+        return empty($this->errors) === false;
+    }
 }

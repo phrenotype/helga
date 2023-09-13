@@ -64,9 +64,9 @@ class Validator
     public function passes()
     {
         $vs = $this->eval();
-        if ($vs->passed) {
+        if ($vs->passed()) {
             return true;
-        } else {
+        } else if($vs->failed()) {
             return false;
         }
     }
@@ -79,9 +79,9 @@ class Validator
     public function fails()
     {
         $vs = $this->eval();
-        if ($vs->failed) {
+        if ($vs->failed()) {
             return true;
-        } else {
+        } else if($vs->passed()) {
             return false;
         }
     }
@@ -242,7 +242,7 @@ class Validator
 
     private function eval()
     {
-        $vs = (new RuleParser($this->__rules__))->parse($this->__subject__, $this->__key__);
+        $vs = (new RuleParser($this->__rules__))->parse($this->__subject__, $this->__key__);        
         $this->__errors__ = $vs->errors;
         return $vs;
     }
